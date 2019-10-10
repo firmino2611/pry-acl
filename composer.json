@@ -1,0 +1,13 @@
+{
+    "name": "firmino/user-acl",
+    "description": "'ACL package'",
+    "type": "package",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "firmino2611",
+            "email": "lucasfirmino_dev@homail.com"
+        }
+    ],
+    "require": {}
+}
