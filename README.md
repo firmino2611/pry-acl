@@ -18,6 +18,33 @@ Installation manually, add in file composer.json
     }
 }
 ```
+
+### Publish the package configuration
+
+```php
+ php artisan vendor:publish --tag=config
+ ```
+
+ Verify the configuration 
+
+ ```php
+<?php
+
+return [
+
+    /**
+     * Name of table users
+     */
+    'table_users' => 'users',
+
+    /**
+     * Define a prefix to tables of database application
+     */
+    'table_prefix' => 'acl_'
+];
+
+ ```
+
 ### Configuration laravel 5.5+
 
 Laravel's package discovery will take care of integration for you.
