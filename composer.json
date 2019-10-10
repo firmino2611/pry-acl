@@ -1,6 +1,6 @@
 {
-    "name": "firmino/user-acl",
-    "description": "'ACL package'",
+    "name": "firmino/pry-acl",
+    "description": "ACL package",
     "type": "package",
     "license": "MIT",
     "authors": [
@@ -9,5 +9,18 @@
             "email": "lucasfirmino_dev@homail.com"
         }
     ],
-    "require": {}
+    "require": {},
+    "autoload": {
+        "psr-4": {
+            "Firmino\\UserAcl\\": "./"
+        }
+    },
+    "extra": {
+        "providers": [
+            "Firmino\\UserAcl\\Providers\\UserAclServiceProvider"
+        ],
+        "aliases": {
+            "Acl": "Firmino\\UserAcl\\Facades\\Acl"
+        }
+    }
 }

@@ -4,6 +4,9 @@ namespace Firmino\UserAcl\Http;
 
 use Illuminate\Database\Eloquent\Model;
 
+/**
+ * @property  role_id
+ */
 class RoleUser extends Model
 {
     protected $table;
