@@ -63,6 +63,16 @@ $user->revokeAllRole();
 
 ```
 
+### Blade extensions
+
+Allow viewing of certain content based on authenticated user role.
+
+```php 
+@role('admin')
+    <h1>I am Admin</h1>
+@endrole
+```
+
 ### Facade
 Import Facade ``` Acl ``` 
 
