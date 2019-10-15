@@ -56,7 +56,7 @@ Add the following settings to your app.php file.
 ```php 
 'providers' => array(
     //...
-    Firmino\EasyPaginator\Providers\UserAclrServiceProvider::class,
+    Firmino\UserAcl\Providers\UserAclServiceProvider::class,
 ),
 ```
 and add aliases
@@ -101,7 +101,7 @@ Allow viewing of certain content based on authenticated user role.
 ```
 
 ### Facade
-Import Facade ``` Acl ``` 
+Import Facade ``` Firmino\UserAcl\Facades\Acl ``` 
 
 #### Create roles
 
