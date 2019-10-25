@@ -84,11 +84,11 @@ trait Roles {
                 explode($operator, $slug)
             );
 
-            // Case operator OR
             if ($slugs->count() > 1) {
                 $roles = $this->getRoles();
                 $num_roles = 0;
 
+                // Operator AND
                 if ($operator == ','){
                     foreach ($roles as $role) {
                         $slugs->contains($role->slug);
@@ -96,11 +96,12 @@ trait Roles {
                     }
                     return $num_roles == $slugs->count() ? true : false;
                 }
-
+                // Case operator OR
                 if ($operator == '|'){
                     foreach ($roles as $role) {
-                        $slugs->contains($role->slug);
-                        return true;
+                        if ($slugs->contains($role->slug)) {
+                            return true;
+                        }
                     }
                     return false;
                 }
@@ -116,7 +117,7 @@ trait Roles {
      * @param $string
      * @return string
      */
-    public function getOperator ($string) {
+    private function getOperator ($string) {
         $op = Str::contains($string, '|');
         if ($op)
             return '|';
