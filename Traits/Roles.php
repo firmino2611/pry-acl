@@ -7,6 +7,7 @@ use Firmino\UserAcl\Facades\Acl;
 use Firmino\UserAcl\Http\Role;
 use Firmino\UserAcl\Http\RoleUser;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Str;
 
 trait Roles {
 
@@ -77,7 +78,53 @@ trait Roles {
      * @return bool
      */
     public function hasRole (string $slug) {
+        $operator = $this->getOperator($slug);
+        if ($operator) {
+            $slugs = Collection::make(
+                explode($operator, $slug)
+            );
+
+            // Case operator OR
+            if ($slugs->count() > 1) {
+                $roles = $this->getRoles();
+                $num_roles = 0;
+
+                if ($operator == ','){
+                    foreach ($roles as $role) {
+                        $slugs->contains($role->slug);
+                        $num_roles++;
+                    }
+                    return $num_roles == $slugs->count() ? true : false;
+                }
+
+                if ($operator == '|'){
+                    foreach ($roles as $role) {
+                        $slugs->contains($role->slug);
+                        return true;
+                    }
+                    return false;
+                }
+
+            }
+        }
+
         $roles = $this->getRoles();
         return $roles->where('slug', $slug)->first() ? true : false;
+    }
+
+    /**
+     * @param $string
+     * @return string
+     */
+    public function getOperator ($string) {
+        $op = Str::contains($string, '|');
+        if ($op)
+            return '|';
+
+        $op = Str::contains($string, ',');
+        if ($op)
+            return ',';
+
+        return '';
     }
 }
